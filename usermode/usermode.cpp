@@ -74,6 +74,11 @@ int main(int argc, const char* argv[])
     log("Waiting...");
     while (req->op != operation_t::op_finish) {};
 
+    // Newly allocated memory
+    UINT64 dll = req->dll_base;
+    log("Dll @ 0x%llx", dll);
+    
+
     if (FAIL(VirtualFree(dll_base, 0, MEM_RELEASE)))
         return -1;
     if (FAIL(VirtualFree(shared_page, 0, MEM_RELEASE)))

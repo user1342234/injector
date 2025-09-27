@@ -103,7 +103,8 @@ NTSTATUS start() {
 		fail("MmAllocateMemory failed");
 	log("Allocated memory at: %p", allocated_base);
 	
-	// Use PspCreateProcessNotifyRoutine to intercept target process creation. Then change thread context to dll.
+	// Send back the address of newly allocated memory
+	req->dll_base = (UINT64)allocated_base;
 
 	ExFreePool(dll_in_memory);
 	return STATUS_SUCCESS;
